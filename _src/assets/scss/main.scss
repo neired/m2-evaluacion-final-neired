@@ -4,7 +4,10 @@
 .main__title {
   text-transform: capitalize;
 }
-
+.search-fav__container{
+  display: flex;
+  flex-direction: row;
+}
 .show__item {
   background: rgb(240, 166, 178);
   color: fuchsia;
@@ -16,4 +19,7 @@
 .show__item_fav{
   display:flex;
   flex-direction: row;
+}
+.favs__results {
+  padding: 0;
 }
