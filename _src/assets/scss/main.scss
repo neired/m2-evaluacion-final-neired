@@ -2,24 +2,51 @@
   display: none;
 }
 .main__title {
-  text-transform: capitalize;
+  text-align: center;
+  font-family: sans-serif;
+}
+.main__title::first-letter {
+  text-transform: uppercase;
 }
 .search-fav__container{
   display: flex;
   flex-direction: row;
 }
 .show__item {
-  background: rgb(240, 166, 178);
-  color: fuchsia;
+  background: lightskyblue;
+  color: rgb(4, 4, 49);
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 8px;
+  width: 226px;
 }
 .show__fav {
-  background: fuchsia;
-  color: rgb(240, 166, 178);
+  background: rgb(4, 4, 49);
+  color: lightskyblue;
 }
 .show__item_fav{
   display:flex;
   flex-direction: row;
+  font-family: sans-serif;
+  align-items: center;
 }
 .favs__results {
   padding: 0;
+}
+.favs__results .show__item-img {
+  width: 80px;
+  margin-right: 10px;
+}
+.favh2 {
+  font-family: sans-serif;
+  &::first-letter{
+    text-transform: uppercase;
+  }
+}
+.series__results {
+  display: grid;
+  grid-template-columns: repeat(3, 226px);
+}
+.series__results .show__item-img {
+  width: 200px;
 }

@@ -21,14 +21,15 @@ function searchWithEnter() {
 }
 input.addEventListener('keypress', searchWithEnter);
 
+let showName = '';
 function getSeries () {
   resetSearch();
   fetch(endpoint + input.value)
     .then(response => response.json())
     .then(data => {
-      // 3- me devuelva esas series y las pinte en un <li> para cada serie, con una <img> y un <h3>
+      //me devuelve las series y las pinta en un <li> para cada serie, con una <img> y un <h3>
       for (let item of data) {
-        let showName = item.show.name;
+        showName = item.show.name;
         let showImage = item.show.image;
         newLi = document.createElement('li');
         newLi.classList.add('show__item');
@@ -41,7 +42,7 @@ function getSeries () {
         newLi.appendChild(newImage);
         newLi.appendChild(newH3);
         newH3.innerHTML = showName;
-        // 4- si alguna serie no tiene <img>, que le añada una por defecto
+        //si alguna serie no tiene <img>, que le añada una por defecto
         if (showImage !== null) {
           newImage.src = showImage.medium;
           newImage.alt = showName;
@@ -56,40 +57,6 @@ function getSeries () {
 }
 btn.addEventListener('click', getSeries);
 
-// 3- moverlos a otra lista
-
-// function getFavs (){
-//   console.log(event.currentTarget);
-//   event.currentTarget.classList.toggle('show__fav');
-//   favsContainer.classList.remove('hidden');
-//   addFav();
-// }
-function addFav () {
-  // 1- cambiar los estilos de fondo y color de fuente a la que seleccione como favorita
-  const currentShow = event.currentTarget;
-  currentShow.classList.toggle('show__fav');
-  favsContainer.classList.remove('hidden');
-  const favShowName = currentShow.getAttribute('data-name');
-  // 2- hacer un array con las pelis favoritas
-  if (currentShow.classList.contains('show__fav') === true) {
-    //si lo he marcado como fav, al array (si no está ya de antes, claro)
-    if (favorites.includes(favShowName) !== true){
-      favorites.push(favShowName);
-      let newFavLi = document.createElement('li');
-      // newFavLi.classList.add('show__item_fav');
-      favoritesList.appendChild(newFavLi);
-      newFavLi.innerHTML = event.currentTarget.innerHTML;
-// }
-    }
-  } else {
-    //si ya está de antes y lo estoy re-marcando, me lo borras
-    const i = favorites.indexOf(favShowName);
-    if (i > -1) {
-      favorites.splice(i, 1);
-    }
-  }
-  console.log(favorites);
-}
 //hace un array con las pelis que salen y les pone un listener a todas para marcarlas como favs
 function selectFav () {
   const myShows = document.querySelectorAll('.show__item');
@@ -97,10 +64,44 @@ function selectFav () {
     show.addEventListener('click', addFav);
   }
 }
+let newFavLi ='';
 
-//   {
-//   let newFavLi = document.createElement('li');
-//   newFavLi.classList.add('show__item_fav');
-//   favorites.appendChild(newFavLi);
-//   newFavLi.innerHTML = event.currentTarget.innerHTML;
+function addFav () {
+  //cambia los estilos de fondo y color de fuente a la que seleccione como favorita
+  let currentShow = event.currentTarget;
+  currentShow.classList.toggle('show__fav');
+  favsContainer.classList.remove('hidden');
+  const favShowName = currentShow.getAttribute('data-name');
+
+  //hace un array con las pelis favoritas si tienen la clase show__fav
+  if (currentShow.classList.contains('show__fav') === true) {
+    //si lo he marcado como fav y no estaba, al array y a la lista de favoritos
+    if (favorites.includes(favShowName) !== true){
+      favorites.push(favShowName);
+
+      newFavLi = document.createElement('li');
+      newFavLi.classList.add('show__item_fav');
+      newFavLi.setAttribute('data-fav', favShowName);
+      favoritesList.appendChild(newFavLi);
+      newFavLi.innerHTML = currentShow.innerHTML;
+
+      localStorage.setItem('favshow', favShowName);
+    }
+    console.log(favorites);
+  } else {
+    //si ya está de antes y lo estoy re-marcando, me lo borras
+    const i = favorites.indexOf(favShowName);
+    if (i > -1) {
+      favorites.splice(i, 1);
+      favoritesList.removeChild(newFavLi);
+    }
+    console.log(favorites);
+  }
+}
+
+//copia los elementos del array a la lista de favoritos
+// function paintFavs () {
+// console.log(favorites);
+
 // }
+
