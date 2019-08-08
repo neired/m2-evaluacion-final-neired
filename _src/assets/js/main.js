@@ -3,8 +3,8 @@
 const btn = document.querySelector('.btn');
 const input = document.querySelector('.input');
 const series = document.querySelector('.series__results');
-const favoritas = document.querySelector('.favs__results');
-// const container = document.querySelector('.series__container');
+let favorites = document.querySelector('.favs__results');
+const favsContainer = document.querySelector('.favs');
 const endpoint = 'http://api.tvmaze.com/search/shows?q=';
 let newLi = '';
 let newH3 = '';
@@ -58,4 +58,20 @@ input.addEventListener('keypress', searchWithEnter);
 // 2- moverlos a otra lista
 function getFavs (){
   event.currentTarget.classList.toggle('show__fav');
+  favsContainer.classList.remove('hidden');
+  addFav();
+}
+
+function addFav () {
+  let newFavLi = document.createElement('li');
+  let newFavImage = document.createElement('image');
+  let newFavH3 = document.createElement('h3');
+  newFavLi.classList.add('show__item_fav');
+  favorites.appendChild(newFavLi);
+  newFavLi.appendChild(newFavImage);
+  newFavLi.appendChild(newFavH3);
+  newFavH3.innerHTML = event.currentTarget.innerHTML;
+}
+function removeFav () {
+  favorites.remove();
 }
