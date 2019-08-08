@@ -33,7 +33,10 @@ function getSeries () {
       }
     });
 }
-
+// 5- cuando haga una nueva búsqueda no quiero tener las anteriores en pantalla
+function resetSearch () {
+  series.innerHTML = '';
+}
 function getNewSearch () {
   if (series.innerHTML === '') {
     getSeries();
@@ -44,7 +47,10 @@ function getNewSearch () {
 }
 btn.addEventListener('click', getNewSearch);
 
-// 5- cuando haga una nueva búsqueda no quiero tener las anteriores en pantalla
-function resetSearch () {
-  series.innerHTML = '';
+function compareWithEnter() {
+  if(event.keyCode===13) {
+    getNewSearch();
+  }
 }
+input.addEventListener('keypress', compareWithEnter);
+
