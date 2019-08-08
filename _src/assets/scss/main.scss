@@ -5,7 +5,11 @@
   text-transform: capitalize;
 }
 
-.show__style {
+.show__item {
   background: rgb(240, 166, 178);
-  color: white;
+  color: fuchsia;
+}
+.show__fav {
+  background: fuchsia;
+  color: rgb(240, 166, 178);
 }
