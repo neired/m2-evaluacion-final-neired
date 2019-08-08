@@ -3,7 +3,7 @@
 const btn = document.querySelector('.btn');
 const input = document.querySelector('.input');
 const series = document.querySelector('.series__results');
-const container = document.querySelector('.series__container');
+// const container = document.querySelector('.series__container');
 const endpoint = 'http://api.tvmaze.com/search/shows?q=';
 
 function getSeries () {
@@ -34,5 +34,17 @@ function getSeries () {
     });
 }
 
-btn.addEventListener('click', getSeries);
+function getNewSearch () {
+  if (series.innerHTML === '') {
+    getSeries();
+  } else {
+    resetSearch();
+    getSeries();
+  }
+}
+btn.addEventListener('click', getNewSearch);
 
+// 5- cuando haga una nueva búsqueda no quiero tener las anteriores en pantalla
+function resetSearch () {
+  series.innerHTML = '';
+}
