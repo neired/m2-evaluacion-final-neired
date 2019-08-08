@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-	<meta charset="UTF-8">
-	<title>Adalab Web Starter Kit</title>
-  <link rel="icon" href="favicon.png"/>
-	<link rel="stylesheet" href="assets/css/main.css">
-</head>
-<body>
-  <div class="page">
-    <partial src="_header.html" label="Header"></partial>
-    <partial src="_main.html" label="Main"></partial>
-    <partial src="_link.html" aClass="link__adalab" text="Adalab" url="https://adalab.es"></partial>
-    <partial src="_link.html" aClass="link__github" text="GitHub" url="https://github.com"></partial>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1>" />
+    <title>Buscador de series</title>
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <h1 class="main__title">buscador de series</h1>
+    <div class="search-fav__container">
+      <div class="search">
+        <input type="text" name="serie" id="serie" value="" class="input">
+        <button type="button" class="btn">search</button>
+      </div>
+      <div class="favs">
+        <h2>mis series favoritas</h2>
+        <ul class="favs__results"></ul>
+      </div>
+    </div>
+    <div class="series__container">
+      <ul class="series__results">fsfd</ul>
+    </div>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
