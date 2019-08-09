@@ -1,0 +1,11 @@
+.main__title {
+  text-align: center;
+  font-family: sans-serif;
+}
+.search {
+  display: flex;
+  justify-content: center;
+}
+.main__title::first-letter {
+  text-transform: uppercase;
+}

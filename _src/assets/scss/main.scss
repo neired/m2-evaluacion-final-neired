@@ -1,25 +1,14 @@
-.main__title {
-  text-align: center;
-  font-family: sans-serif;
-}
-.main__title::first-letter {
-  text-transform: uppercase;
-}
+// HEADER
+@import 'layouts/header';
+
+
+//CONTENEDOR DEL MAIN
 .search-fav__container{
-  // display: flex;
-  // flex-direction: row;
   display: grid;
   grid-template-columns: 250px, 1fr;
 }
-.show__item {
-  border: 2px solid rgb(4, 4, 49);
-  color: rgb(4, 4, 49);
-  font-family: sans-serif;
-  text-align: center;
-  padding-top: 8px;
-  border-radius: 5px;
-  width: 170px;
-}
+
+//LISTA DE FAVORITOS
 .show__fav {
   background: rgb(4, 4, 49);
   color: lightskyblue;
@@ -43,6 +32,21 @@
     text-transform: uppercase;
   }
 }
+.favs {
+  grid-column: 1/2;
+  padding-right: 8px;
+}
+
+//LISTA DE SERIES
+.show__item {
+  border: 2px solid rgb(4, 4, 49);
+  color: rgb(4, 4, 49);
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 8px;
+  border-radius: 5px;
+  width: 170px;
+}
 .series__results {
   grid-column: 2/3;
   display: flex;
@@ -55,6 +59,4 @@
 .series__results .show__item-name {
   margin: 5px auto;
 }
-.favs {
-  grid-column: 1/2;
-}
+
