@@ -1,17 +1,22 @@
 // HEADER
 @import 'layouts/header';
 
-
+.body {
+  // background: rgb(248, 248, 139);
+  background: rgb(3, 3, 37);
+}
 //CONTENEDOR DEL MAIN
 .search-fav__container{
   display: grid;
   grid-template-columns: 250px, 1fr;
+  margin-top: 10px;
+  color: rgb(214, 205, 205);
 }
 
 //LISTA DE FAVORITOS
 .show__fav {
-  background: rgb(4, 4, 49);
-  color: lightskyblue;
+  background: rgb(214, 205, 205);
+  color: rgb(3, 3, 37);
 }
 .show__item_fav{
   display:flex;
@@ -20,7 +25,9 @@
   align-items: center;
 }
 .favs__results {
-  padding: 0;
+  padding-right: 10px;
+  padding-left: 0;
+  border-right: 2px solid rgb(214, 205, 205);
 }
 .favs__results .show__item-img {
   width: 80px;
@@ -39,12 +46,11 @@
 
 //LISTA DE SERIES
 .show__item {
-  border: 2px solid rgb(4, 4, 49);
-  color: rgb(4, 4, 49);
+  // border: 2px solid rgb(4, 4, 49);
   font-family: sans-serif;
   text-align: center;
   padding-top: 8px;
-  border-radius: 5px;
+  // border-radius: 5px;
   width: 170px;
 }
 .series__results {
