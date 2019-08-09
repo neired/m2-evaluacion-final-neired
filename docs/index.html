@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>FilmSearchify</title>
+        <link rel="icon" href="assets/images/film-solid.svg"
+        />
+        <link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    
+    <body class="body">
+        <header class="header">
+             <h1 class="main__title">film searchify</h1>
+
+             <h2 class="main-subtitle">tu buscador de series favorito</h2>
+
+            <div class="search">
+                <input type="text" name="serie" id="serie" value="" class="input" placeholder="Busca una serie..."
+                />
+                <button type="button" class="btn">search</button>
+            </div>
+        </header>
+        <main class="search-fav__container">
+            <div class="favs">
+                 <h2 class="favh2">mis series favoritas</h2>
+
+                <ul class="favs__results"></ul>
+                <button type="reset" class="btn reset-btn">Borrar</button>
+            </div>
+            <ul class="series__results"></ul>
+        </main>
+        <script src="assets/js/main.js"></script>
+    </body>
+
+</html>
