@@ -4,7 +4,6 @@ const btn = document.querySelector('.btn');
 const input = document.querySelector('.input');
 const series = document.querySelector('.series__results');
 let favoritesList = document.querySelector('.favs__results');
-// const favsContainer = document.querySelector('.favs');
 const endpoint = 'http://api.tvmaze.com/search/shows?q=';
 let newLi = '';
 let newH3 = '';
@@ -50,6 +49,7 @@ function getSeries () {
           newImage.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
           newImage.alt = `${showName} image`;
         }
+
         selectFav ();
       }
     });
@@ -85,6 +85,7 @@ function addFav (event) {
   if (indexFav > -1) {
     console.log(indexFav);
     favorites.splice(indexFav, 1);
+    console.log(favorites);
   } else {
     const selectedShowSrc = currentShow.querySelector('.show__item-img').src;
     const selectedShowName = currentShow.querySelector('.show__item-name').innerHTML;
@@ -96,36 +97,11 @@ function addFav (event) {
     newFavLi.innerHTML = currentShow.innerHTML;
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
-
-  //hace un array con las pelis favoritas si tienen la clase show__fav
-  // if (currentShow.classList.contains('show__fav') === true) {
-  //   //si lo he marcado como fav y no estaba:
-  //   if (favorites.includes(favShowName) !== true){
-  //     // añádelo al array,
-  //     favorites.push(favShowName);
-  //     // a la lista de favoritos,
-  //     newFavLi = document.createElement('li');
-  //     newFavLi.classList.add('show__item_fav');
-  //     newFavLi.setAttribute('data-fav', favShowName);
-  //     favoritesList.appendChild(newFavLi);
-  //     newFavLi.innerHTML = currentShow.innerHTML;
-  //   }
-  console.log(favorites);
-  // } else {
-  //   //si ya está de antes y lo estoy re-marcando, me lo borras
-  //   const i = favorites.indexOf(favShowName);
-  // if (i > -1) {
-  //   favorites.splice(i, 1);
-  // }
-  //   //como puede ser que ahora me diga que no es su child??
-  //   favoritesList.removeChild(newFavLi);
 }
-// }
 
 reload ();
 function reload () {
   if (JSON.parse(localStorage.getItem('favorites'))){
-    console.log('hola');
     for (const item of JSON.parse(localStorage.getItem('favorites'))){
       const newLi = document.createElement('li');
       newLi.classList.add('show__item_fav');
@@ -138,8 +114,6 @@ function reload () {
       newLi.appendChild(newH3);
       newH3.innerHTML = item.name;
       newImage.src = item.src;
-
-
     }
   }
 }

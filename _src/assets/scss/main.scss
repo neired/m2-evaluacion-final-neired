@@ -1,6 +1,3 @@
-.hidden {
-  display: none;
-}
 .main__title {
   text-align: center;
   font-family: sans-serif;
@@ -9,16 +6,19 @@
   text-transform: uppercase;
 }
 .search-fav__container{
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
+  display: grid;
+  grid-template-columns: 250px, 1fr;
 }
 .show__item {
-  background: lightskyblue;
+  border: 2px solid rgb(4, 4, 49);
   color: rgb(4, 4, 49);
   font-family: sans-serif;
   text-align: center;
   padding-top: 8px;
-  width: 226px;
+  border-radius: 5px;
+  width: 170px;
 }
 .show__fav {
   background: rgb(4, 4, 49);
@@ -44,9 +44,17 @@
   }
 }
 .series__results {
-  display: grid;
-  grid-template-columns: repeat(3, 226px);
+  grid-column: 2/3;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
 }
 .series__results .show__item-img {
-  width: 200px;
+  width: 150px;
+}
+.series__results .show__item-name {
+  margin: 5px auto;
+}
+.favs {
+  grid-column: 1/2;
 }
