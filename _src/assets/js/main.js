@@ -4,12 +4,12 @@ const btn = document.querySelector('.btn');
 const input = document.querySelector('.input');
 const series = document.querySelector('.series__results');
 let favoritesList = document.querySelector('.favs__results');
-const favsContainer = document.querySelector('.favs');
+// const favsContainer = document.querySelector('.favs');
 const endpoint = 'http://api.tvmaze.com/search/shows?q=';
 let newLi = '';
 let newH3 = '';
 let newImage = '';
-const favorites = [];
+let favorites = [];
 
 function resetSearch () {
   series.innerHTML = '';
@@ -32,8 +32,8 @@ function getSeries () {
         showName = item.show.name;
         let showImage = item.show.image;
         newLi = document.createElement('li');
+        newLi.dataset['id'] = item.show.id;
         newLi.classList.add('show__item');
-        newLi.setAttribute('data-name', showName);
         newH3 = document.createElement('h3');
         newH3.classList.add('show__item-name');
         newImage = document.createElement('img');
@@ -51,7 +51,6 @@ function getSeries () {
           newImage.alt = `${showName} image`;
         }
         selectFav ();
-        // newLi.addEventListener('click', getFavs);
       }
     });
 }
@@ -64,44 +63,83 @@ function selectFav () {
     show.addEventListener('click', addFav);
   }
 }
-let newFavLi ='';
 
-function addFav () {
+function addFav (event) {
   //cambia los estilos de fondo y color de fuente a la que seleccione como favorita
   let currentShow = event.currentTarget;
   currentShow.classList.toggle('show__fav');
-  favsContainer.classList.remove('hidden');
-  const favShowName = currentShow.getAttribute('data-name');
+  let newFavLi ='';
+  let object = currentShow.dataset['id'];
+
+  function findShowInFavs(favorites) {
+    return favorites.id === object;
+  }
+  const indexFav = favorites.findIndex(findShowInFavs);
+
+  if ((JSON.parse(localStorage.getItem('favorites')))){
+    favorites = JSON.parse(localStorage.getItem('favorites'));
+  } else {
+    favorites = [];
+  }
+
+  if (indexFav > -1) {
+    console.log(indexFav);
+    favorites.splice(indexFav, 1);
+  } else {
+    const selectedShowSrc = currentShow.querySelector('.show__item-img').src;
+    const selectedShowName = currentShow.querySelector('.show__item-name').innerHTML;
+    favorites.push({id:object, src:selectedShowSrc, name:selectedShowName});
+
+    newFavLi = document.createElement('li');
+    newFavLi.classList.add('show__item_fav');
+    favoritesList.appendChild(newFavLi);
+    newFavLi.innerHTML = currentShow.innerHTML;
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
 
   //hace un array con las pelis favoritas si tienen la clase show__fav
-  if (currentShow.classList.contains('show__fav') === true) {
-    //si lo he marcado como fav y no estaba, al array y a la lista de favoritos
-    if (favorites.includes(favShowName) !== true){
-      favorites.push(favShowName);
-
-      newFavLi = document.createElement('li');
-      newFavLi.classList.add('show__item_fav');
-      newFavLi.setAttribute('data-fav', favShowName);
-      favoritesList.appendChild(newFavLi);
-      newFavLi.innerHTML = currentShow.innerHTML;
-
-      localStorage.setItem('favshow', favShowName);
-    }
-    console.log(favorites);
-  } else {
-    //si ya está de antes y lo estoy re-marcando, me lo borras
-    const i = favorites.indexOf(favShowName);
-    if (i > -1) {
-      favorites.splice(i, 1);
-      favoritesList.removeChild(newFavLi);
-    }
-    console.log(favorites);
-  }
+  // if (currentShow.classList.contains('show__fav') === true) {
+  //   //si lo he marcado como fav y no estaba:
+  //   if (favorites.includes(favShowName) !== true){
+  //     // añádelo al array,
+  //     favorites.push(favShowName);
+  //     // a la lista de favoritos,
+  //     newFavLi = document.createElement('li');
+  //     newFavLi.classList.add('show__item_fav');
+  //     newFavLi.setAttribute('data-fav', favShowName);
+  //     favoritesList.appendChild(newFavLi);
+  //     newFavLi.innerHTML = currentShow.innerHTML;
+  //   }
+  console.log(favorites);
+  // } else {
+  //   //si ya está de antes y lo estoy re-marcando, me lo borras
+  //   const i = favorites.indexOf(favShowName);
+  // if (i > -1) {
+  //   favorites.splice(i, 1);
+  // }
+  //   //como puede ser que ahora me diga que no es su child??
+  //   favoritesList.removeChild(newFavLi);
 }
-
-//copia los elementos del array a la lista de favoritos
-// function paintFavs () {
-// console.log(favorites);
-
 // }
 
+reload ();
+function reload () {
+  if (JSON.parse(localStorage.getItem('favorites'))){
+    console.log('hola');
+    for (const item of JSON.parse(localStorage.getItem('favorites'))){
+      const newLi = document.createElement('li');
+      newLi.classList.add('show__item_fav');
+      favoritesList.appendChild(newLi);
+      newH3 = document.createElement('h3');
+      newH3.classList.add('show__item-name');
+      newImage = document.createElement('img');
+      newImage.classList.add('show__item-img');
+      newLi.appendChild(newImage);
+      newLi.appendChild(newH3);
+      newH3.innerHTML = item.name;
+      newImage.src = item.src;
+
+
+    }
+  }
+}
