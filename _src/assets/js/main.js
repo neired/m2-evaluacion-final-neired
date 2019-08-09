@@ -83,9 +83,7 @@ function addFav (event) {
   }
 
   if (indexFav > -1) {
-    console.log(indexFav);
     favorites.splice(indexFav, 1);
-    console.log(favorites);
   } else {
     const selectedShowSrc = currentShow.querySelector('.show__item-img').src;
     const selectedShowName = currentShow.querySelector('.show__item-name').innerHTML;
@@ -95,8 +93,8 @@ function addFav (event) {
     newFavLi.classList.add('show__item_fav');
     favoritesList.appendChild(newFavLi);
     newFavLi.innerHTML = currentShow.innerHTML;
-    localStorage.setItem('favorites', JSON.stringify(favorites));
   }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
 reload ();
@@ -117,13 +115,3 @@ function reload () {
     }
   }
 }
-
-const btnReset = document.querySelector('.reset-btn');
-function resetData () {
-  favoritesList.innerHTML = '';
-  favorites = '';
-  localStorage.clear();
-  series.innerHTML = '';
-  input.value = '';
-}
-btnReset.addEventListener('click', resetData);
