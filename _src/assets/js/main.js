@@ -117,3 +117,13 @@ function reload () {
     }
   }
 }
+
+const btnReset = document.querySelector('.reset-btn');
+function resetData () {
+  favoritesList.innerHTML = '';
+  favorites = '';
+  localStorage.clear();
+  series.innerHTML = '';
+  input.value = '';
+}
+btnReset.addEventListener('click', resetData);
