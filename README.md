@@ -8,3 +8,4 @@ Una vez aparecen los resultados de búsqueda, podremos indicar cuáles son nuest
 Esos favoritos se van guardando en el Local Storage de modo que están accesibles en futuras visitas a la página.
 
 ## Link de acceso a la página
+http://beta.adalab.es/m2-evaluacion-final-neired/
