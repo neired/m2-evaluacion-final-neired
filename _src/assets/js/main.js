@@ -30,17 +30,29 @@ function getSeries () {
       for (let item of data) {
         showName = item.show.name;
         let showImage = item.show.image;
+        let showDays = item.show.schedule.days;
         newLi = document.createElement('li');
         newLi.dataset['id'] = item.show.id;
         newLi.classList.add('show__item');
         newH3 = document.createElement('h3');
         newH3.classList.add('show__item-name');
+        let newUl = document.createElement('ul');
+
         newImage = document.createElement('img');
         newImage.classList.add('show__item-img');
         series.appendChild(newLi);
         newLi.appendChild(newImage);
         newLi.appendChild(newH3);
+        for (const day of showDays) {
+          const newLiDay = document.createElement('li');
+          const newLiDayContent = document.createTextNode(day);
+          newLiDay.appendChild(newLiDayContent);
+          newUl.appendChild(newLiDay);
+        }
+        newLi.appendChild(newUl);
+
         newH3.innerHTML = showName;
+
         //si alguna serie no tiene <img>, que le añada una por defecto
         if (showImage !== null) {
           newImage.src = showImage.medium;
@@ -93,9 +105,19 @@ function addFav (event) {
     newFavLi.classList.add('show__item_fav');
     favoritesList.appendChild(newFavLi);
     newFavLi.innerHTML = currentShow.innerHTML;
+
+
+    newFavLi.addEventListener('click', log);
+
   }
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
+
+function log (event) {
+  const currentFavName = event.currentTarget.querySelector('.show__item-name').innerHTML;
+  console.log(currentFavName);
+}
+
 
 reload ();
 function reload () {
